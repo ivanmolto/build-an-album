@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import {connect} from 'react-redux';
+import {TrackContainer} from './Track'
 
 
 export const App = React.createClass({
@@ -16,10 +17,13 @@ export const App = React.createClass({
         <button
           onClick={() => this.props.decrement()}
         >Decrement</button>
+        <TrackContainer />
       </div>
     )
   }
 });
+
+
 
 const mapStateToProps = (state) => {
   return {
@@ -29,9 +33,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // increment: function() {
-    //   dispatch({type: 'INCREMENT'})
-    // }
     increment: () => dispatch({type: 'INCREMENT'}),
     decrement: () => dispatch({type: 'DECREMENT'})
   }
@@ -42,50 +43,3 @@ export const AppContainer = connect(
   mapDispatchToProps
 )(App);
 
-  // ,
-  // mapDispatchToProps
-// const App = ({ total, increment }) => {
-//   return(
-//     <div>
-//       <h3>Total - {total}</h3>
-//       <button onClick={increment()}>Button - Dude</button>
-//     </div>
-//   )
-// }
-
-// App.propTypes = {
-//   total: PropTypes.number.isRequired,
-//   increment: PropTypes.func.isRequired
-// }
-
-  // increment: function() {
-  //   console.log('incremenetttighansdjkfa')
-  //   dispatch({
-  //     type: 'INCREMENT'
-  //   })
-  // },
-  // render: function() {
-  //   return <div>
-  //     <h3>Total - {this.props.total}</h3>
-  //     <button onClick={this.increment}>Button - Dude</button>
-  //   </div>
-  // }
-
-
-
-
-// export default App = React.createClass({
-//   increment: function() {
-//     console.log('incremenetttighansdjkfa')
-//     dispatch({
-//       type: 'INCREMENT'
-//     })
-//   },
-//   render: function() {
-//     return <div>
-//       <h3>Total - {this.props.total}</h3>
-//       <button onClick={this.increment()}>Button - Dude</button>
-//     </div>
-//   }
-
-// });

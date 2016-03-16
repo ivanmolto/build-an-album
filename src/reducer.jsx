@@ -21,8 +21,17 @@ function decrement(total) {
 
 // }
 
+const INITIAL_STATE = {
+  total: 0,
+  tracks: [{
+    name: 'Doodie and Kids',
+    featuring: 'Samwise Gamgy',
+    id: 0
+  }]
+}
 
-export default function reducer(state = {total:0}, action) {
+
+export default function reducer(state = INITIAL_STATE, action) {
   console.log('STATE BEFORE', state)
   console.log('action', action)
   switch (action.type) {
