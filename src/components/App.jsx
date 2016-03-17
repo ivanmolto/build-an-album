@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import {connect} from 'react-redux';
-import {TrackContainer} from './Track'
+import {TracksContainer} from './Tracks'
 
 
 export const App = React.createClass({
@@ -17,7 +17,7 @@ export const App = React.createClass({
         <button
           onClick={() => this.props.decrement()}
         >Decrement</button>
-        <TrackContainer />
+        <TracksContainer />
       </div>
     )
   }
