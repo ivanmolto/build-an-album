@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import {connect} from 'react-redux';
+import * as actionCreators from '../action_creators';
 
 let style = {
   border: '1px solid #333'
@@ -47,7 +48,7 @@ export const Tracks = React.createClass({
             <h3>Featuring: {track.featuring}</h3>
             <button
               style={buttonStyle}
-              onClick={() => this.props.editTrack(track.id)}
+              onClick={() => this.props.EditTrack(track.id)}
             > Edit</button>
           </div>
         )}
@@ -58,22 +59,11 @@ export const Tracks = React.createClass({
 
 const mapStateToProps = (state) => {
   return {
-    tracks: state.tracks
-    // id: state.track.id,
-    // name: state.track.name,
-    // featuring: state.track.featuring,
-  }
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    editTrack: (id) => dispatch({type: 'EDIT_TRACK', id}),
-    saveTrack: (track) => dispatch({type: 'SAVE_TRACK', track})
   }
 }
 
 export const TracksContainer = connect(
   mapStateToProps,
-  mapDispatchToProps
+  actionCreators
 )(Tracks);
 

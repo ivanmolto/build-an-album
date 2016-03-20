@@ -1,6 +1,13 @@
-export function Increment(state) {
+export function AddTrack(state) {
   return {
-    type: 'INCREMENT',
+    type: 'ADD_TRACK',
     state
   }
+}
+
+export function EditTrack(track) {
+	return {
+		type: 'EDIT_TRACK',
+		track
+	}
 }

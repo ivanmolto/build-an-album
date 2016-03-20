@@ -8,9 +8,13 @@ import reducer from './reducer';
 
 const store = createStore(reducer)
 
+// require('../node_modules/bootstrap/dist/css/bootstrap-theme.min.css');
+// require('../node_modules/bootstrap/dist/css/bootstrap.min.css');
+// require('../node_modules/bootstrap/dist/js/bootstrap.min.js');
+
 render(
   <Provider store={store}>
-    <AppContainer />
+    <App />
   </Provider>,
   document.getElementById('app')
 );
