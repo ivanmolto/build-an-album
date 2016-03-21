@@ -8,10 +8,18 @@ function editTrack(state, id) {
 
 function addTrack(state) {
   console.log('ADD TRACK FIRING');
-  return state;
+  return state.setIn(['release', 'tracks'], (todos) => {
+    return todos.push({
+      id: 2,
+      sequence: 3,
+      name: '',
+      featuring: '',
+      currentlyEditing: true
+    })
+  });
 }
 
-const INITIAL_STATE = {
+const INITIAL_STATE = fromJS({
   release: {
     title: 'No Take Backs',
     artist: 'Often Frequent',
@@ -19,7 +27,7 @@ const INITIAL_STATE = {
     releaseName: 'STD001',
     releaseDate: '2016',
     country: 'United States',
-    image: 'http://lorempixel.com/image_output/abstract-q-g-400-400-4.jpg',
+    image: 'http://lorempixel.com/image_output/food-q-g-640-480-2.jpg',
     tracks: [
       {
         id: 0,
@@ -36,7 +44,7 @@ const INITIAL_STATE = {
       }
     ]
   }
-}
+})
 
 
 export default function reducer(state = INITIAL_STATE, action) {

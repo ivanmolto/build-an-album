@@ -2,24 +2,21 @@ import React, {PropTypes} from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import {connect} from 'react-redux';
 import * as actionCreators from '../action_creators';
+import {List, Map, toJS, fromJS} from 'immutable';
+
 
 let style = {
-  border: '1px solid #333'
+  borderTop: '1px solid #333'
 };
-
-let buttonStyle = {
-  float: 'right'
-}
 
 export const Tracks = React.createClass({
   mixins: [PureRenderMixin],
   render: function() {
-    console.log('Array.isArray(this.props.tracks)', Array.isArray(this.props.tracks))
-    console.log('tracks', this.props.tracks)
     let input_name
     let input_featuring
+    console.log('TRACKS', this.props.tracks);
     return (
-      <div style={style}>
+      <div>
         {this.props.tracks.map(track =>
           track.currentlyEditing ?
           <form
@@ -43,15 +40,19 @@ export const Tracks = React.createClass({
             > Save</button>
           </form>
           :
-          <div key={track.id}>
+          <div key={track.id}  style={style}>
             <h1>{track.name}</h1>
             <h3>Featuring: {track.featuring}</h3>
             <button
-              style={buttonStyle}
               onClick={() => this.props.EditTrack(track.id)}
             > Edit</button>
           </div>
         )}
+        <div style={style}>
+          <button
+            onClick={() => this.props.AddTrack()}
+          >+</button>
+        </div>
       </div>
     )
   }
