@@ -1,54 +1,53 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import {connect} from 'react-redux';
 import * as actionCreators from '../action_creators';
 import {List, Map, toJS, fromJS} from 'immutable';
 
 
-let style = {
-  borderTop: '1px solid #333'
-};
-
-export const Tracks = React.createClass({
-  mixins: [PureRenderMixin],
-  render: function() {
+export class Tracks extends React.Component{
+  constructor(props) {
+    super(props);
+    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
+  }
+  updateInput(ref) {
+    // this.props.
+  }
+  render() {
     let input_name
     let input_featuring
-    console.log('TRACKS', this.props.tracks);
+    console.log('TRACKS', this.props.tracks.toJS());
     return (
-      <div>
+      <div className="track-container">
         {this.props.tracks.map(track =>
-          track.currentlyEditing ?
-          <form
-            key={track.id}
-            onSubmit={e => {
-              e.preventDefault()
-              this.props.saveTrack({
-                id: track.id,
-                name: input_name.value,
-                featuring: input_featuring.value
-              })
-            }}
-          >
+          track.get('currentlyEditing') ?
+          <div key={track.get('id')}>
             <label>Name</label>
-            <input defaultValue={track.name} ref={node => { input_name = node }} />
+            <input 
+              defaultValue={track.get('name')} 
+              ref="trackName"
+              placeholder="Track Title"
+              onKeyDown={() => this.handleKeyDown("trackName")}
+            />
             <br/>
             <label>Featuring</label>
-            <input defaultValue={track.featuring} ref={node => { input_featuring = node }} />
-            <button
-              style={buttonStyle}
-            > Save</button>
-          </form>
+            <input 
+              defaultValue={track.get('featuring')} 
+              placeholder="Featuring"
+              ref="trackFeaturing" 
+              onKeyDown={() => this.handleKeyDown("trackFeaturing")}
+            />
+          </div>
           :
-          <div key={track.id}  style={style}>
-            <h1>{track.name}</h1>
-            <h3>Featuring: {track.featuring}</h3>
+          <div key={track.get('id')}>
+            <h4>{track.get('name')}</h4>
+            <h5>Featuring: {track.get('featuring')}</h5>
             <button
-              onClick={() => this.props.EditTrack(track.id)}
+              onClick={() => this.props.EditTrack(track.get('id'))}
             > Edit</button>
           </div>
         )}
-        <div style={style}>
+        <div>
           <button
             onClick={() => this.props.AddTrack()}
           >+</button>
@@ -56,7 +55,7 @@ export const Tracks = React.createClass({
       </div>
     )
   }
-});
+};
 
 const mapStateToProps = (state) => {
   return {

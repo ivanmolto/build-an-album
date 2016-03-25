@@ -1,0 +1,10 @@
+input[type="text"] {
+   -webkit-appearance: none;
+   -moz-appearance:    none;
+   appearance:         none;
+	border:0px;
+}
+
+input:focus{
+    outline: none;
+}

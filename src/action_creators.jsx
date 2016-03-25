@@ -5,9 +5,9 @@ export function AddTrack(state) {
   }
 }
 
-export function EditTrack(track) {
+export function EditTrack(id) {
 	return {
 		type: 'EDIT_TRACK',
-		track
+		id
 	}
 }
