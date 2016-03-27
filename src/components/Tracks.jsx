@@ -1,8 +1,10 @@
 import React from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import {connect} from 'react-redux';
-import * as actionCreators from '../action_creators';
+import { AddTrack, ChangeTrackInfo } from '../action_creators';
+import {InputField} from './general/TextInput';
 import {List, Map, toJS, fromJS} from 'immutable';
+import {DropZone} from './general/DropZone';
 
 
 export class Tracks extends React.Component{
@@ -13,38 +15,36 @@ export class Tracks extends React.Component{
   updateInput(ref) {
     // this.props.
   }
+  cb(f,v,id) {
+    this.props.ChangeTrackInfo(f,v,id)
+  }
   render() {
     let input_name
     let input_featuring
     console.log('TRACKS', this.props.tracks.toJS());
     return (
-      <div className="track-container">
-        {this.props.tracks.map(track =>
-          track.get('currentlyEditing') ?
-          <div key={track.get('id')}>
-            <label>Name</label>
-            <input 
-              defaultValue={track.get('name')} 
-              ref="trackName"
-              placeholder="Track Title"
-              onKeyDown={() => this.handleKeyDown("trackName")}
+      <div className="tracks-container">
+        <DropZone />
+        {this.props.tracks.map( (track, i) =>
+          <div 
+            key={track.get('id')}
+            className="track-container"
+          >
+            <span>{track.get('sequence')}</span>
+            <InputField 
+              callback={(f,v) => this.cb(f,v,track.get('id'))}
+              field="name"
+              initialValue={track.get('name')}
+              readOnly={false}
+              placeholder={'Name'}
             />
-            <br/>
-            <label>Featuring</label>
-            <input 
-              defaultValue={track.get('featuring')} 
-              placeholder="Featuring"
-              ref="trackFeaturing" 
-              onKeyDown={() => this.handleKeyDown("trackFeaturing")}
+            <InputField 
+              callback={(f,v) => this.cb(f,v,track.get('id'))}
+              field="featuring"
+              initialValue={track.get('featuring')}
+              readOnly={false}
+              placeholder={'Featuring'}
             />
-          </div>
-          :
-          <div key={track.get('id')}>
-            <h4>{track.get('name')}</h4>
-            <h5>Featuring: {track.get('featuring')}</h5>
-            <button
-              onClick={() => this.props.EditTrack(track.get('id'))}
-            > Edit</button>
           </div>
         )}
         <div>
@@ -64,6 +64,6 @@ const mapStateToProps = (state) => {
 
 export const TracksContainer = connect(
   mapStateToProps,
-  actionCreators
+  { AddTrack, ChangeTrackInfo }
 )(Tracks);
 

@@ -18,21 +18,30 @@ export class InputField extends React.Component{
         return null;
     }
   }
+  handleBlur(){
+    console.log('BLUR');
+    this.props.callback(this.props.field, this.refs.inputField.value);
+  }
   render() {
   	return (
-  		<div className="input_field_container">
-  			<input
-  				type="text"
-  				placeholder="Stuff"
-  				onKeyDown={(e) => this.handleKeyDown(e)}
-  			/>
-  		</div>
+			<input
+        ref="inputField"
+				type="text"
+				placeholder={this.props.placeholder}
+				onKeyDown={(e) => this.handleKeyDown(e)}
+        onBlur={() => this.handleBlur()}
+        defaultValue={this.props.initialValue}
+        readOnly={this.props.readOnly || false}
+			/>
   	)
   }
 }
 
 
 InputField.propTypes = {
- // field: React.PropTypes.string.isRequired   
- // callback: React.PropTypes.func.isRequired   
+  field: React.PropTypes.string.isRequired,
+  callback: React.PropTypes.func.isRequired,
+  initialValue: React.PropTypes.string,
+  placeholder: React.PropTypes.string,
+  readOnly: React.PropTypes.bool
 }

@@ -63,7 +63,21 @@ export default function reducer(state = INITIAL_STATE, action) {
       return addTrack(state);
     case 'EDIT_TRACK' :
       return editTrack(state, action.id)
-    case 'UPDATE_TRACK_FIELD' :
+    case 'CHANGE_RELEASE_FIELD' :
+      return state.update('release', release => release.set(action.field, action.value))
+    case 'CHANGE_TRACK_FIELD' :
+      console.log('change track')
+      return state.updateIn(['release', 'tracks'], tracks => {
+        return tracks.map(track => {
+          console.log('MAP')
+          if(track.get('id') === action.id) {
+            console.log('MAP =', action.id)
+            return track.set(action.field, action.value);
+          }
+          return track;
+        });
+      });
+    case 'UPDATE_TRACK_FIELD'  :
       return state
     default :
       return state

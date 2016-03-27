@@ -1,9 +1,34 @@
 .release-image {
-		height:150px;
+		height: 150px;
     background-size: cover;
     background-position: center;
 }
 
+.tracks-container {
+	border: 1px solid black;
+	height: 700px;
+	position: relative;
+}
+
 .track-container {
-	border:1px solid black;
+	border-top:1px solid orange;
+	border-bottom:1px solid orange;
+	height:50px;
+	position: relative;
+	width:100%;
+	z-index:1;
+
+	input {
+		display: inline-block;
+		margin-left: 20px;
+	}
+}
+
+
+.if-lg-text input {
+	font-size: 24px;
+}
+
+.if-md-text input {
+	font-size: 18px;
 }

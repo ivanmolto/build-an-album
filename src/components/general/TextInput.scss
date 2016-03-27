@@ -1,10 +1,12 @@
 input[type="text"] {
-   -webkit-appearance: none;
-   -moz-appearance:    none;
-   appearance:         none;
+	-webkit-appearance: none;
+	-moz-appearance:    none;
+	appearance:         none;
 	border:0px;
+	font-size:16px;
 }
 
 input:focus{
-    outline: none;
+  outline: none;
+  border-bottom:2px solid green;
 }
