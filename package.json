@@ -34,8 +34,10 @@
     ]
   },
   "dependencies": {
+    "aws-sdk": "^2.2.47",
     "bootstrap": "^3.3.6",
     "immutable": "^3.7.6",
+    "node-uuid": "^1.4.7",
     "react": "^0.14.7",
     "react-addons-pure-render-mixin": "^0.14.7",
     "react-addons-test-utils": "^0.14.7",

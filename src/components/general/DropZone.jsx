@@ -10,7 +10,7 @@ const getStyle = (image) => {
     position: 'absolute',
     width: '100%',
     height: '100%',
-    
+
   }
 }
 
@@ -18,18 +18,37 @@ export class DropZone extends React.Component{
   constructor(props) {
     super(props);
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
+
+    this.state = {
+      files: []
+    };
   }
   onDrop(files) {
-    console.log('Received files: ', files);
+    console.log('Received files: ', files[0].type);
+    //handle rejected file
+    if(files[0].type === "audio/aiff" ||
+      files[0].type === "audio/wav" ||
+      files[0].type === 'audio/mp3') {
+      this.props.onAcceptedFileDrop(files[0]);
+      return
+    }
+
+      console.log('YOU FUCKED UP')
   }
   render() {
     return (
-      <Dropzone 
-        onDrop={this.onDrop}
+      <Dropzone
+        ref="dzone"
+        onDrop={(files) => this.onDrop(files)}
         style={getStyle()}
+        accept={'audio/aiff,audio/wav,audio/mp3'}
       >
-        <div>Try dropping some files here, or click to select files to upload.</div>
       </Dropzone>
     );
   }
 };
+
+
+DropZone.propTypes = {
+  onAcceptedFileDrop: React.PropTypes.func.isRequired,
+}

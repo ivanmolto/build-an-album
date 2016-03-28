@@ -1,7 +1,13 @@
-export function AddTrack(state) {
+export function AddTrackWithFile(file) {
+  return {
+    type: 'ADD_TRACK_WITH_FILE',
+    file
+  }
+}
+
+export function AddTrack() {
   return {
     type: 'ADD_TRACK',
-    state
   }
 }
 
