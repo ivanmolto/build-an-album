@@ -1,4 +1,5 @@
 import {List, Map, toJS, fromJS} from 'immutable';
+import uuid from 'node-uuid';
 // import fetch from 'whatwg-fetch';
 
 function editTrack(state, id) {
@@ -13,20 +14,6 @@ function editTrack(state, id) {
   })
 }
 
-function addTrack(state) {
-  console.log('ADD TRACK FIRING');
-  const sequence = state.getIn(['release','tracks']).size;
-  return state.updateIn(['release', 'tracks'], (todos) => {
-    return todos.push(fromJS({
-      id: 2,
-      sequence: sequence,
-      name: '',
-      featuring: '',
-      currentlyEditing: true
-    }))
-  });
-}
-
 const INITIAL_STATE = fromJS({
   release: {
     title: 'No Take Backs',
@@ -38,13 +25,13 @@ const INITIAL_STATE = fromJS({
     image: 'http://lorempixel.com/image_output/food-q-g-640-480-2.jpg',
     tracks: [
       {
-        id: 0,
+        id: uuid.v1(),
         sequence: 1,
         name: 'Cabinet Kickin',
         featuring: 'Samwise Gamgy',
         currentlyEditing: false
       },{
-        id: 1,
+        id: uuid.v1(),
         sequence: 2,
         name: 'Doodie and Kids',
         featuring: '',
@@ -56,11 +43,34 @@ const INITIAL_STATE = fromJS({
 
 
 export default function reducer(state = INITIAL_STATE, action) {
+  let sequence;
   console.log('STATE BEFORE', state)
   console.log('action', action)
   switch (action.type) {
+    case 'ADD_TRACK_WITH_FILE' :
+      sequence = state.getIn(['release','tracks']).size + 1;
+      return state.updateIn(['release','tracks'], tracks => {
+        console.log('IN TRACKS', action)
+        return tracks.push(fromJS({
+          id: uuid.v1(),
+          sequence: sequence,
+          name: action.file.name,
+          featuring: '',
+          currentlyEditing: true
+        }))
+      });
     case 'ADD_TRACK' :
-      return addTrack(state);
+      sequence = state.getIn(['release','tracks']).size + 1;
+      return state.updateIn(['release','tracks'], tracks => {
+        console.log('IN TRACKS', action)
+        return tracks.push(fromJS({
+          id: uuid.v1(),
+          sequence: sequence,
+          name: '',
+          featuring: '',
+          currentlyEditing: true
+        }))
+      });
     case 'EDIT_TRACK' :
       return editTrack(state, action.id)
     case 'CHANGE_RELEASE_FIELD' :

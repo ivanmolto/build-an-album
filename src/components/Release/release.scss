@@ -10,20 +10,27 @@
 	position: relative;
 }
 
-.track-container {
-	border-top:1px solid orange;
+.track-container, .add-track-container {
 	border-bottom:1px solid orange;
 	height:50px;
 	position: relative;
 	width:100%;
 	z-index:1;
+	background-color: white;
 
 	input {
 		display: inline-block;
-		margin-left: 20px;
+		margin-right: 20px;
+		margin-left: 5px;
+	}
+
+	.track-sequence {
+		display: inline-block;
+		span {
+			margin: 10px;
+		}
 	}
 }
-
 
 .if-lg-text input {
 	font-size: 24px;

@@ -3,7 +3,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 import {connect} from 'react-redux';
 import {TracksContainer} from '../Tracks';
 import {InputField} from '../general/TextInput';
-// import Container from '../general/DndContainer';
+import Container from '../general/DndContainer';
 import { ChangeReleaseInfo } from '../../action_creators';
 
 require('./release.scss');
@@ -34,7 +34,7 @@ export class Release extends React.Component{
 					</div>
 					<div className="col-xs-5">
 						<div className="if-lg-text">
-							<InputField 
+							<InputField
 								callback={(f,v) => this.cb(f,v)}
 								field="artist"
 								initialValue={this.props.artist}
@@ -42,7 +42,7 @@ export class Release extends React.Component{
 							/>
 						</div>
 						<div className="if-md-text">
-							<InputField 
+							<InputField
 								callback={(f,v) => this.cb(f,v)}
 								field="title"
 								initialValue={this.props.title}
@@ -53,7 +53,7 @@ export class Release extends React.Component{
 					</div>
 					<div className="col-xs-5">
 						<div className="if-lg-text">
-							<InputField 
+							<InputField
 								callback={(f,v) => this.cb(f,v)}
 								field="label"
 								initialValue={this.props.label}
@@ -62,7 +62,7 @@ export class Release extends React.Component{
 							/>
 						</div>
 						<div className="if-md-text">
-							<InputField 
+							<InputField
 								callback={(f,v) => this.cb(f,v)}
 								field="releaseName"
 								initialValue={this.props.releaseName}
@@ -75,19 +75,18 @@ export class Release extends React.Component{
 				</div>
 				<div className="row">
 					<div className="col-xs-2">
-						<div>{this.props.tracks.toJS()[0].featuring}</div>
 					</div>
 					<div className="col-xs-10">
-						<TracksContainer 
+						<TracksContainer
 							tracks={this.props.tracks}
 						/>
 					</div>
 				</div>
+				<Container />
 			</div>
 		)
 	}
 }
-				// <Container />
 
 
 const mapStateToProps = (state) => {
